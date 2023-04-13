@@ -1,16 +1,16 @@
 import peewee
 
 from app.v1.utils.db import db
-from jurisdiccion_model import Jurisdiccion
-from user_model import User
+from .jurisdiccion_model import Jurisdiccion
+from .user_model import User
 
 class Juicio(peewee.Model):
-    negociador = peewee.ForeignKeyField(User)
+    responsable = peewee.ForeignKeyField(User)
     jurisdicion = peewee.ForeignKeyField(Jurisdiccion)
     caratula = peewee.CharField()
     nexpediente = peewee.CharField()
     materia = peewee.CharField()
-    estado_procesal = peewee.Charfield()
+    estado_procesal = peewee.CharField()
     situacion_tramite = peewee.CharField()
     tipo_reclamo = peewee.CharField()
     siniestro = peewee.IntegerField()

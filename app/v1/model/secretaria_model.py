@@ -1,7 +1,7 @@
 import peewee 
 
 from app.v1.utils.db import db
-from juzgado_model import Juzgado
+from .juzgado_model import Juzgado
 
 class Secretaria(peewee.Model):
     juzgado = peewee.ForeignKeyField(Juzgado)

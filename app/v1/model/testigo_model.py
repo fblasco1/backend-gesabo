@@ -1,8 +1,8 @@
 import peewee
 
 from app.v1.utils.db import db
-from persona_model import Persona
-from juicio_model import Juicio
+from .persona_model import Persona
+from .juicio_model import Juicio
 
 class Testigo(peewee.Model):
     testigo = peewee.ForeignKeyField(Persona)

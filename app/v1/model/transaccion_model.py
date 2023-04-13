@@ -1,7 +1,7 @@
 import peewee
 
 from app.v1.utils.db import db
-from juicio_model import Juicio
+from .juicio_model import Juicio
 
 class Transaccion(peewee.Model):
     juicio = peewee.ForeignKeyField(Juicio)
