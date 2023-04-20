@@ -2,6 +2,7 @@
 *.pot
 *.pyc
 __pycache__/
+venv
 env
 .env
 .pytest_cache
