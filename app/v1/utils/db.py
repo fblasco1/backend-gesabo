@@ -2,16 +2,15 @@ import peewee
 from contextvars import ContextVar
 from fastapi import Depends
 
+from .settings import Settings
 
-from app.v1.utils.settings import Settings
+settings = Settings()
 
-SETTINGS = Settings()
-
-POSTGRES_USER = SETTINGS.POSTGRES_USER
-POSTGRES_PASSWORD = SETTINGS.POSTGRES_PASSWORD
-POSTGRES_SERVER = SETTINGS.POSTGRES_SERVER
-POSTGRES_PORT = SETTINGS.POSTGRES_PORT
-POSTGRES_DB = SETTINGS.POSTGRES_DB
+DB_NAME = settings.db_name
+DB_USER = settings.db_user
+DB_PASS = settings.db_password
+DB_HOST = settings.db_host
+DB_PORT = settings.db_port
 
 db_state_default = {"closed": None, "conn": None, "ctx": None, "transactions": None}
 db_state = ContextVar("db_state", default=db_state_default.copy())
@@ -28,7 +27,7 @@ class PeeweeConnectionState(peewee._ConnectionState):
         return self._state.get()[name]
 
 
-db = peewee.PostgresqlDatabase(POSTGRES_DB, user=POSTGRES_USER, password=POSTGRES_PASSWORD, host=POSTGRES_SERVER, port=POSTGRES_PORT)
+db = peewee.PostgresqlDatabase(DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
 
 db._state = PeeweeConnectionState()
 
