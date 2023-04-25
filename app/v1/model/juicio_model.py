@@ -5,7 +5,6 @@ from .jurisdiccion_model import Jurisdiccion
 from .user_model import User
 
 class Juicio(peewee.Model):
-    responsable = peewee.ForeignKeyField(User)
     jurisdicion = peewee.ForeignKeyField(Jurisdiccion)
     caratula = peewee.CharField()
     nexpediente = peewee.CharField()
@@ -28,6 +27,13 @@ class Juicio(peewee.Model):
     defensas_opuestas = peewee.CharField()
     observaciones = peewee.TextField()
     informe_medico = peewee.FloatField()
+
+    class Meta:
+        database = db
+
+class Juicio_Abogado(peewee.Model):
+    abogado = peewee.ForeignKeyField(User, backref="abogados")
+    juicio = peewee.ForeignKeyField(Juicio, backref="juicios")
 
     class Meta:
         database = db
