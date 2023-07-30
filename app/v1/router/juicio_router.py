@@ -1,15 +1,14 @@
-from fastapi import APIRouter, Depends, Body
-from fastapi import status
+from fastapi import status, APIRouter, Depends, Body
 from typing import List
 
 from app.v1.schema import juicio_schema
-from app.v1.schema.user_schema import User
-from app.v1.service import juicio_service
-from app.v1.service.auth_service import get_current_user
+from app.v1.service import juicio_service, auth_service
 from app.v1.utils.db import get_db
 
-
-router = APIRouter(prefix="/api/v1/juicio")
+router = APIRouter(
+    prefix="/api/v1/juicio",
+    dependencies=[Depends(auth_service.get_current_user)]
+)
 
 @router.post(
     "/",

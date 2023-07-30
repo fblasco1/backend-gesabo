@@ -80,7 +80,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         usuario: str = payload.get("sub")
         if usuario is None:
             raise credentials_exception
-        token_data = TokenData(usuario=usuario)
+        token_data = TokenData(username=usuario)
     except JWTError:
         raise credentials_exception
 
